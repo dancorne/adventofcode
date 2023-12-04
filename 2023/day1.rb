@@ -9,29 +9,36 @@ class Day1
     "#{line[/\d/]}#{line.reverse[/\d/]}".to_i
   end
 
+  WORDS_TO_DIGITS = {
+    'one' => '1',
+    'two' => '2',
+    'three' => '3',
+    'four' => '4',
+    'five' => '5',
+    'six' => '6',
+    'seven' => '7',
+    'eight' => '8',
+    'nine' => '9'
+  }.freeze
+
+  DIGIT_REGEXP = Regexp.union(WORDS_TO_DIGITS.keys << /\d/)
+
   def part2(input)
     input.lines.sum { |line| process_line(line) }
   end
 
   def process_line(line)
-    "#{word_to_digit(line)[/\d/]}#{word_to_digit(line).reverse[/\d/]}".to_i
-  end
-
-  def word_to_digit(line)
-    line
-      .gsub('one', '1')
-      .gsub('two', '2')
-      .gsub('three', '3')
-      .gsub('four', '4')
-      .gsub('five', '5')
-      .gsub('six', '6')
-      .gsub('seven', '7')
-      .gsub('eight', '8')
-      .gsub('nine', '9')
+    numbers = line.scan(/(?=(#{DIGIT_REGEXP}))/).flatten
+    first_match = numbers[0]
+    last_match = numbers[numbers.size - 1]
+    first = WORDS_TO_DIGITS.fetch(first_match, first_match)
+    last = WORDS_TO_DIGITS.fetch(last_match, last_match)
+    "#{first}#{last}".to_i
   end
 end
 
 if __FILE__ == $PROGRAM_NAME
   input = File.read('./input/day1')
   puts Day1.new.part1(input)
+  puts Day1.new.part2(input)
 end
