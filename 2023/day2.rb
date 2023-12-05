@@ -22,10 +22,25 @@ class Day2
   def possible_result?(result)
     result.fetch('green', 0) <= 13 && result.fetch('red', 0) <= 12 && result.fetch('blue', 0) <= 14
   end
+
+  def colours_max(results)
+    maximums = {}
+    results.each do |result|
+      result.each do |colour, count|
+        maximums[colour] = count if count > maximums.fetch(colour, 0)
+      end
+    end
+    maximums
+  end
+
+  def part2(input)
+    games = parse_games(input)
+    games.values.sum { |results| colours_max(results).values.inject(&:*) }
+  end
 end
 
 if __FILE__ == $PROGRAM_NAME
   input = File.read('./input/day2')
   puts Day2.new.part1(input)
-  # puts Day2.new.part2(input)
+  puts Day2.new.part2(input)
 end
