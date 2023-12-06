@@ -33,4 +33,20 @@ class Day3Test < Minitest::Test
     INPUT
     assert_equal [[1, 3], [3, 6], [4, 3], [5, 5], [8, 3], [8, 5]], Day3.new(input).find_symbols
   end
+
+  def test_part2
+    input = <<~INPUT
+      467..114..
+      ...*......
+      ..35..633.
+      ......#...
+      617*......
+      .....+.58.
+      ..592.....
+      ......755.
+      ...$.*....
+      .664.598..
+    INPUT
+    assert_equal 467_835, Day3.new(input).part2
+  end
 end
