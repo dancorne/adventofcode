@@ -3,7 +3,6 @@ require_relative 'day3'
 
 class Day3Test < Minitest::Test
   def test_part1
-    skip
     input = <<~INPUT
       467..114..
       ...*......
