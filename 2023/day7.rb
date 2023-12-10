@@ -76,9 +76,14 @@ class Day7
 
   def part2_hand_score(hand)
     groups = hand.chars.tally
-    counts = groups.except { 'J' }.values.sort.reverse
+    j_count = groups.delete('J')
+    counts = groups.values.sort.reverse
     # You're always going to get a better score if the J is included with the most frequent card
-    counts[0] = counts[0] + groups.fetch('J', 0)
+    counts[0] = if counts.empty?
+                  j_count
+                else
+                  j_count ? counts[0] + j_count : counts[0]
+                end
 
     if counts.include?(5)
       6
