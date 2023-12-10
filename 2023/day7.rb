@@ -18,18 +18,18 @@ class Day7
   end
 
   def hand_score(hand)
-    case hand.chars.sort.join
-    when /(.)\1{4}/
+    groups = hand.chars.tally
+    if groups.values.include?(5)
       6
-    when /(.)\1{3}/
+    elsif groups.values.include?(4)
       5
-    when /(.)\1\1(.)\2|(.)\1(.)\2\2/
+    elsif groups.values.include?(3) && groups.values.include?(2)
       4
-    when /(.)\1\1/
+    elsif groups.values.include?(3)
       3
-    when /(.)\1.?(.)\2/
+    elsif groups.values.count(2) == 2
       2
-    when /(.)\1/
+    elsif groups.values.include?(2)
       1
     else
       0
