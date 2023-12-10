@@ -9,4 +9,12 @@ class Day6Test < Minitest::Test
     INPUT
     assert_equal 288, Day6.new(input).part1
   end
+
+  def test_part2
+    input = <<~INPUT
+      Time:      7  15   30
+      Distance:  9  40  200
+    INPUT
+    assert_equal 71_503, Day6.new(input).part2
+  end
 end
