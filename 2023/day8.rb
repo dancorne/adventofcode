@@ -25,13 +25,15 @@ class Day8
   end
 
   def part2
-    current_nodes = @nodes.keys.select { |node| node.end_with? 'A' }
-    count = 0
-    until current_nodes.all? { |node| node.end_with? 'Z' }
-      current_nodes.map! { |node| follow_step(node, @steps[count % @steps.length]) }
-      count += 1
-    end
-    count
+    starting_nodes = @nodes.keys.select { |node| node.end_with? 'A' }
+    starting_nodes.map do |node|
+      count = 0
+      until node.end_with? 'Z'
+        node = follow_step(node, @steps[count % @steps.length])
+        count += 1
+      end
+      count
+    end.reduce(1, :lcm)
   end
 end
 
