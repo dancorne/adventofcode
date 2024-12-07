@@ -55,6 +55,11 @@ class Day2Test < Minitest::Test
     assert_equal [true, false, false, true, true, true], Day2.new(INPUT).reports.map(&:part2_safe?)
   end
 
+  def test_part2_another_result
+    input = '2 1 3 4 5'
+    assert_equal [true], Day2.new(input).reports.map(&:part2_safe?)
+  end
+
   def test_part2
     assert_equal 4, Day2.new(INPUT).part2
   end

@@ -7,30 +7,22 @@ class Report
     @levels = line.split.map(&:to_i)
   end
 
-  def safety
-    increasing = @levels[0] < @levels[1]
-    @levels.each_cons(2).map do |a, b|
+  def safety(levels)
+    increasing = levels[0] < levels[1]
+    levels.each_cons(2).map do |a, b|
       (a - b).abs.between?(1, 3) && a < b == increasing
     end
   end
 
   def safe?
-    safety.all?
+    safety(@levels).all?
   end
 
   def part2_safe?
-    increasing = @levels[0] < @levels[1]
-    skipped_level = false
-    @levels.each_cons(3).map do |a, b, c|
-      if (a - b).abs.between?(1, 3) && a < b == increasing
-        true
-      elsif !skipped_level && (a - c).abs.between?(1, 3) && a < c == increasing
-        skipped_level = true
-        true
-      else
-        false
-      end
-    end.all?
+    (0..@levels.length).each do |i|
+      return true if safety(@levels.reject.with_index { |_, j| j == i }).all?
+    end
+    false
   end
 end
 
