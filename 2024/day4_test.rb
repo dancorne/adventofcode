@@ -35,22 +35,22 @@ class Day4Test < Minitest::Test
   end
 
   def test_across
-    output = 'MMMSXXMASM'
+    output = ["M", "M", "M", "S", "X", "X", "M", "A", "S", "M"]
     assert_equal output, Day4.new(INPUT).crossword_across[0]
   end
 
   def test_down
-    output = 'MMAMXXSSMM'
+    output = ["M", "M", "A", "M", "X", "X", "S", "S", "M", "M"]
     assert_equal output, Day4.new(INPUT).crossword_down[0]
   end
 
   def test_negative_diagonal
-    output = 'MSXMAXSAMX'
+    output = [ "M", "S", "X", "M", "A", "X", "S", "A", "M", "X"]
     assert_equal output, Day4.new(INPUT).crossword_negative_diagonal[9]
   end
 
   def test_positive_diagonal
-    output = 'MAXMMMMASM'
+    output = ["M", "A", "X", "M", "M", "M", "M", "A", "S", "M"]
     assert_equal output, Day4.new(INPUT).crossword_positive_diagonal[9]
   end
 

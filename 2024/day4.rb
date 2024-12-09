@@ -9,8 +9,8 @@ class Day4
     input.lines.map { |l| l.chomp.split('') }
   end
 
-  def xmas_count(word)
-    word.scan(/XMAS/).size
+  def xmas_count(arr)
+    arr.join('').scan(/XMAS/).size
   end
 
   def grid_height
@@ -19,18 +19,18 @@ class Day4
   end
 
   def crossword_across
-    @crossword.map { |l| l.join('') }
+    @crossword
   end
 
   def crossword_down
-    @crossword.transpose.map { |l| l.join('') }
+    @crossword.transpose
   end
 
   def crossword_negative_diagonal
     grid_height.downto(-grid_height).map do |y|
       (0..grid_height).map do |x|
         @crossword.fetch(y + x, [])[x] if (y + x).between?(0, grid_height) && x.between?(0, grid_height)
-      end.compact.join('')
+      end.compact
     end
   end
 
@@ -38,7 +38,7 @@ class Day4
     (-grid_height..grid_height).map do |x|
       grid_height.downto(0).map do |y|
         @crossword.fetch(y, [])[x + (grid_height - y)] if y.between?(0, grid_height) && (x + grid_height - y).between?(0, grid_height)
-      end.compact.join('')
+      end.compact
     end
   end
 
