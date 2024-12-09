@@ -10,7 +10,7 @@ class Day4
   end
 
   def xmas_count(arr)
-    arr.join('').scan(/XMAS/).size
+    arr.join('').scan(/XMAS/).size + arr.join('').scan(/SAMX/).size
   end
 
   def grid_height
@@ -44,7 +44,7 @@ class Day4
 
   def part1
     (crossword_across + crossword_down + crossword_negative_diagonal + crossword_positive_diagonal).map do |line|
-      xmas_count(line) + xmas_count(line.reverse)
+      xmas_count(line)
     end.sum
   end
 end
