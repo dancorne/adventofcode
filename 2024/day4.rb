@@ -47,12 +47,27 @@ class Day4
       xmas_count(line)
     end.sum
   end
+
+  def x_mas?(x, y)
+    return false unless @crossword[y][x] == 'A' && x.between?(1, grid_height-1) && y.between?(1, grid_height-1)
+
+    "#{@crossword[y - 1][x - 1]}#{@crossword[y][x]}#{@crossword[y + 1][x + 1]}".match?(/MAS|SAM/) &&
+      "#{@crossword[y + 1][x - 1]}#{@crossword[y][x]}#{@crossword[y - 1][x + 1]}".match?(/MAS|SAM/)
+  end
+
+  def part2
+    @crossword.map.with_index do |row, y|
+      row.select.with_index do |_, x|
+        x_mas?(x, y)
+      end.size
+    end.sum
+  end
 end
 
 if __FILE__ == $PROGRAM_NAME
   input = DATA.read
   puts Day4.new(input).part1
-  # puts Day4.new(input).part2
+  puts Day4.new(input).part2
 end
 
 __END__

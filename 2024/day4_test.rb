@@ -57,4 +57,8 @@ class Day4Test < Minitest::Test
   def test_part1
     assert_equal 18, Day4.new(INPUT).part1
   end
+
+  def test_part2
+    assert_equal 9, Day4.new(INPUT).part2
+  end
 end
