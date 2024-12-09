@@ -29,7 +29,7 @@ class Day4
   def crossword_negative_diagonal
     grid_height.downto(-grid_height).map do |y|
       (0..grid_height).map do |x|
-        @crossword.fetch(y + x, [])[x] if (y + x).between?(0, grid_height) && x.between?(0, grid_height)
+        @crossword[y + x][x] if (y + x).between?(0, grid_height) && x.between?(0, grid_height)
       end.compact
     end
   end
@@ -37,7 +37,7 @@ class Day4
   def crossword_positive_diagonal
     (-grid_height..grid_height).map do |x|
       grid_height.downto(0).map do |y|
-        @crossword.fetch(y, [])[x + (grid_height - y)] if y.between?(0, grid_height) && (x + grid_height - y).between?(0, grid_height)
+        @crossword[y][x + (grid_height - y)] if y.between?(0, grid_height) && (x + grid_height - y).between?(0, grid_height)
       end.compact
     end
   end
