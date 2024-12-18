@@ -57,7 +57,7 @@ class Day6
 
   def step_guard
     forward_position = forward
-    if @map[forward.y] && @map[forward.y][forward.x]
+    if @map[forward.y] && @map[forward.y][forward.x] && forward.y >= 0 && forward.x >= 0
       if @map[forward.y][forward.x] != '#'
         @guard = OpenStruct.new(x: forward.x, y: forward.y, direction: @guard.direction)
       else
